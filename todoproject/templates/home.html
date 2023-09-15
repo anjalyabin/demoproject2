@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                 <h1 align="center" style="align:center" class="display-4 fw-bold">Todo</h1>
+              </div>
+
+          </div>
+
+      </div>
+
+    </div>
+
+ <style>
+body{
+  font-family: Calibri, Helvetica, sans-serif;
+  background-color: pink;
+}
+input[type=text]{
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  display: inline-block;
+  border: none;
+  background: #f1f1f1;
+}
+input[type=text]:focus{
+  background-color: orange;
+  outline: none;
+}
+
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+            <form method="POST" class="p-3 shadow">
+    {% csrf_token %}
+                <div class="form-group">
+  <input type="text" name="task" class="form-control" placeholder="Enter Task name">
+    </div>
+    <div class="form-group">
+        <input type="text" class="form-control" name="priority" placeholder="Enter your priority name">
+    </div>
+                 <div class="form-group">
+        <input type="date" class="form-control" name="date" placeholder="Enter your date">
+    </div>
+        <input type="submit" class="btn btn-success">
+
+            </form>
+
+            </div>
+
+
+
+
+
+            <div class="col-md-6">
+                <h3>Task to be Completed</h3>
+                {% for i in task2 %}
+                <div class="shadow card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{i.name}}</h5>
+                        <p><b>{{i.priority}}</b></p>
+                        <p><b>{{i.date}}</b></p>
+
+                        <a class="btn btn-danger" href="{% url 'delete' i.id %}">Done</a>
+                        <a class="btn btn-success" href="{% url 'update' i.id %}">update</a>
+                        </h5>
+                    </div>
+                </div>
+                <br>
+{% endfor %}
+            </div>
+    </div>
+
+
+{% endblock %}
